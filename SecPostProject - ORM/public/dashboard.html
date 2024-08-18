@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script defer src="js/dashboard.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Genel stil ayarları */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        
+        #dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #00796b;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #username-display {
+            font-size: 1.2em;
+        }
+
+        #logout-button {
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        #logout-button:hover {
+            background-color: #c62828;
+        }
+
+        #post-form, #search-form {
+            background: white;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #post-form input, #post-form textarea, #search-form input {
+            width: calc(100% - 22px);
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        #post-form button, #search-form button {
+            width: 100%;
+            background-color: #00796b;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        #post-form button:hover, #search-form button:hover {
+            background-color: #004d40;
+        }
+
+        #posts-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+        }
+
+        .post {
+            background: white;
+            margin: 10px;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: calc(33% - 20px);
+            position: relative;
+        }
+
+        .post h2 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+
+        .post p {
+            margin: 10px 0;
+        }
+
+        .post small {
+            color: #888;
+        }
+
+        .post button.delete-post {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #d32f2f;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 0.8em;
+            transition: background-color 0.3s ease;
+        }
+
+        .post button.delete-post:hover {
+            background-color: #c62828;
+        }
+
+        @media (max-width: 768px) {
+            .post {
+                width: calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .post {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="dashboard-header">
+        <span id="username-display">Logged in as: </span>
+        <button id="logout-button" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+
+    <div id="post-form">
+        <input type="text" id="post-title" placeholder="Post Title">
+        <textarea id="post-content" placeholder="Post Content"></textarea>
+        <button onclick="createPost()">Create Post</button>
+        <p id="post-message"></p>
+    </div>
+    
+    <div id="search-form">
+        <input type="text" id="search-title" placeholder="Search by Title">
+        <button onclick="searchPosts()">Search</button>
+        <p id="search-message"></p>
+    </div>
+
+    <div id="posts-container">
+    </div>
+</body>
+</html>
